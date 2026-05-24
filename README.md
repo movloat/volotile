@@ -1,4 +1,4 @@
-# volotile
+# volatile
 
 Ultra-lightweight, high-performance syntax highlighter for Roblox (RichText). Easy to embed and modify. Works without AST.
 
@@ -18,13 +18,13 @@ local highlighted = volatile.highlight("local num = 5", "Luau")
 print(highlighted)
 ```
 
-**You don't need to pre-format the text in any way.** Volotile can consume any raw string. It processes it and returns the exact same string, wrapped in properly formatted RichText `<font color="...">` tags.
+**You don't need to pre-format the text in any way.** Volatile can consume any raw string. It processes it and returns the exact same string, wrapped in properly formatted RichText `<font color="...">` tags.
 
 ---
 
 ## How to add a dictionary?
 
-On the first execution, volotile calls an internal `init()` function to cache all available language dictionaries into a local hash table, using their file names as keys. 
+On the first execution, Volatile calls an internal `init()` function to cache all available language dictionaries into a local hash table, using their file names as keys. 
 
 To **add a new language**, simply drop its `ModuleScript` into the same folder where the `volatilecore` script is located.
 
