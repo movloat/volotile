@@ -1,0 +1,79 @@
+--!strict
+--!optimize 2
+local lex = {}
+
+lex.lexicon = {
+	["abstract"] = "keyword", ["assert"] = "keyword", ["break"] = "keyword",
+	["case"] = "keyword", ["catch"] = "keyword", ["class"] = "keyword",
+	["const"] = "keyword", ["continue"] = "keyword", ["default"] = "keyword",
+	["do"] = "keyword", ["else"] = "keyword", ["enum"] = "keyword",
+	["extends"] = "keyword", ["final"] = "keyword", ["finally"] = "keyword",
+	["for"] = "keyword", ["goto"] = "keyword", ["if"] = "keyword",
+	["implements"] = "keyword", ["import"] = "keyword", ["instanceof"] = "keyword",
+	["interface"] = "keyword", ["native"] = "keyword", ["new"] = "keyword",
+	["package"] = "keyword", ["private"] = "keyword", ["protected"] = "keyword",
+	["public"] = "keyword", ["return"] = "keyword", ["static"] = "keyword",
+	["strictfp"] = "keyword", ["super"] = "keyword", ["switch"] = "keyword",
+	["synchronized"] = "keyword", ["this"] = "keyword", ["throw"] = "keyword",
+	["throws"] = "keyword", ["transient"] = "keyword", ["try"] = "keyword",
+	["volatile"] = "keyword", ["while"] = "keyword", ["sealed"] = "keyword",
+	["permits"] = "keyword", ["record"] = "keyword", ["yield"] = "keyword",
+
+	["boolean"] = "type", ["byte"] = "type", ["char"] = "type",
+	["double"] = "type", ["float"] = "type", ["int"] = "type",
+	["long"] = "type", ["short"] = "type", ["void"] = "type",
+	["var"] = "type", ["true"] = "keyword", ["false"] = "keyword",
+	["null"] = "keyword",
+
+	["+"] = "operator", ["-"] = "operator", ["*"] = "operator", ["/"] = "operator",
+	["%"] = "operator", ["&"] = "operator", ["|"] = "operator", ["^"] = "operator",
+	["!"] = "operator", ["~"] = "operator", ["="] = "operator", ["<"] = "operator",
+	[">"] = "operator", ["?"] = "operator", [":"] = "operator", [";"] = "operator",
+	["=="] = "operator", ["!="] = "operator", ["<="] = "operator", [">="] = "operator",
+	["&&"] = "operator", ["||"] = "operator", ["++"] = "operator", ["--"] = "operator",
+	["<<"] = "operator", [">>"] = "operator", [">>>"] = "operator",
+	["+="] = "operator", ["-="] = "operator", ["*="] = "operator", ["/="] = "operator",
+	["%="] = "operator", ["&="] = "operator", ["|="] = "operator", ["^="] = "operator",
+	["<<="] = "operator", [">>="] = "operator", [">>>="] = "operator",
+	["."] = "operator", ["->"] = "operator", ["::"] = "operator",
+}
+
+lex.tokens = {
+	{ "comment", "^//.*" },
+	{ "comment", "^/%*.-%*/" },
+	{ "comment", "^/%*.*" },
+
+	{ "string",  '^"[^"\n]*"' },
+	{ "string",  "^'\\?.[^'\n]*'" },
+	{ "string",  '^"""[^"]*"""' },
+
+	{ "number",  "^0x[%da-fA-F_]+" },
+	{ "number",  "^0b[01_]+" },
+	{ "number",  "^%d[%d_]*%.%d+[%+%-]?[eE]?%d*[fFdD]?" },
+	{ "number",  "^%d[%d_]*[lLfFdD]?" },
+
+	{ "operator", "^>>>=" },
+	{ "operator", "^>>>" },
+	{ "operator", "^[<>!=]=" },
+	{ "operator", "^::" },
+	{ "operator", "^[%+%-%*/%%%^#=<>~&|!%?]+" },
+
+	{ "word",    "^[A-Za-z_][A-Za-z0-9_]*" },
+
+	{ "operator", "^[%p]" },
+}
+
+lex.commentOptimize = "^%s*//"
+
+lex.colors = {
+	keyword = "c678dd",
+	type = "e5c07b",
+	operator = "abb2bf",
+	comment = "5c6370",
+	string = "98c379",
+	number = "d19a66",
+	func = "61afef",
+	var = "e06c75"
+}
+
+return table.freeze(lex)
